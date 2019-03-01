@@ -42,6 +42,10 @@ export default {
     left: calc(30% - 17px/2);
     top: calc(50% - 12px/2);
 
+    &.red {
+      background: url('~assets/images/sprites.png') no-repeat -115px -381px;
+    }
+
     &.playing {
       animation: bird-play 0.8s steps(3) infinite;
     }
@@ -53,9 +57,18 @@ export default {
       animation: bird-flying 0.3s linear, bird-play 0.8s steps(3) infinite;
       transform: rotate(-20deg);
     }
+    &.red.flying {
+      animation: bird-flying 0.3s linear, red-bird-play 0.8s steps(3) infinite;
+      transform: rotate(-20deg);
+    }
 
     &.dropping {
       animation: bird-dropping 0.3s linear, bird-play 0.8s steps(3) infinite;;
+      transform: rotate(60deg);
+    }
+    
+    &.red.dropping {
+      animation: bird-dropping 0.3s linear, red-bird-play 0.8s steps(3) infinite;;
       transform: rotate(60deg);
     }
 
@@ -67,6 +80,11 @@ export default {
   @keyframes bird-play {
     from { background-position: -3px -491px }
     to { background-position: -87px -491px; }
+  }
+
+  @keyframes red-bird-play {
+    from { background-position: -115px -381px; }
+    to { background-position: -115px -433px; }
   }
 
   @keyframes bird-flying { 100% { transform: rotate(-20deg); } }

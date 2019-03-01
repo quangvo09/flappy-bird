@@ -6,7 +6,8 @@
   height: $game_height;
   position: relative;
   overflow: hidden;
-  margin-top: calc(50% - 144px);
+  zoom: $zoom; 
+  // margin-top: calc(50% - 144px);
 }
 
 .background {

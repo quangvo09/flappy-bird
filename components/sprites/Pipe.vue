@@ -21,19 +21,25 @@ export default {
     upStyle () {
       return {
         top: `calc(50% + 30px - ${this.$props.top}px)`,
-        right: `${this.$props.step-this.width}px`
+        right: `${this.$props.step-this.width}px`,
+        width: "26px",
+	      height: "160px",
       }
     },
     downStyle () {
       return {
         bottom: `calc(50% + 30px + ${this.$props.top}px)`,
-        right: `${this.$props.step-this.width}px`
+        right: `${this.$props.step-this.width}px`,
+        width: "26px",
+	      height: "160px",
       }
     },
     lineStyle () {
       return {
         top: `calc(50% - 30px - ${this.$props.top}px)`,
-        right: `${this.$props.step-this.width/2}px`
+        right: `${this.$props.step-this.width/2}px`,
+        height: "60px",
+        width: "1px"
       }
     },
   },
