@@ -42,5 +42,15 @@ export const mutations = {
 
   setBound(state, bound) {
     state.bound = bound;
+  },
+
+  reset(state) {
+    state.state = 'normal';
+    state.top = 0;
+    state.left = 0;
+    state.flyDelta = GameSettings.BIRD_FlY_DELTA;
+    state.flyDelta2 = GameSettings.BIRD_FlY_DELTA2;
+    state.dropDelta = GameSettings.BIRD_DROP_DELTA;
+    state.dropDelta2 =  GameSettings.BIRD_DROP_DELTA2;
   }
 }

@@ -8,10 +8,10 @@ export default {
     'isRunning'
   ],
   mounted() {
-  const groundElem = document.getElementById('ground');
-  const bound = groundElem.getBoundingClientRect();
+    const groundElem = document.getElementById('ground');
+    const bound = groundElem.getBoundingClientRect();
 
-  this.$store.commit('ground/setBound', bound);
+    this.$store.commit('ground/setBound', bound);
   },
 }
 </script>

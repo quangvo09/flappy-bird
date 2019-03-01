@@ -1,7 +1,8 @@
 const GAME_STATES = {
   INTRO: 0,
   PLAYING: 1,
-  DEAD: 2
+  DEAD: 2,
+  PREPARE: 4
 }
 
 export const state = () => ({
@@ -20,5 +21,10 @@ export const mutations = {
 
   gainPoint(state) {
     state.score++;
+  },
+
+  restart(state) {
+    state.gameState = GAME_STATES.PREPARE;
+    state.score = 0;
   }
 }

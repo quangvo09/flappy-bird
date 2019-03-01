@@ -23,5 +23,14 @@ export const mutations = {
   setPosition(state, top, left) {
     state.top = top;
     state.left = left;
+  },
+
+  reset(state) {
+    state.top = 0
+    state.left = 0
+    state.pipeUpBound =  null
+    state.pipeDownBound = null
+    state.lineBound = null
+    state.lineDisable = false 
   }
 }
