@@ -27,7 +27,7 @@ export default {
       intervalId: -1,
       pipeSpeed: GameSettings.PIPE_SPEED,
 
-      pipeTop: this.makePipeTop(),
+      pipeTop: 0,
       pipeStep: 0,
       pipeTop2: this.makePipeTop(),
       pipeStep2: -GameSettings.PIPE_DISTANCE
@@ -68,23 +68,54 @@ export default {
         store.commit('bird/drop');
       }
 
-      this.pipeStep+= this.pipeSpeed;
-      this.pipeSpeed += GameSettings.PIPE_SPEED_DELTA;
-      if (this.pipeStep >= (144+26)) {
-        this.pipeStep = 0;
-        this.pipeTop = this.makePipeTop();
+      if (this.isPlaying) {
+        this.pipeStep+= this.pipeSpeed;
+        this.pipeSpeed += GameSettings.PIPE_SPEED_DELTA;
+        if (this.pipeStep >= (144+26)) {
+          this.pipeStep = 0;
+          this.pipeTop = this.makePipeTop();
+          this.$store.commit('pipe/toggleLine', false);
+        }
       }
       
-
       // Check bird intersect with ground
       const gBound = this.$store.state.ground.bound;
       const bBound = this.$store.state.bird.bound;
       const birdTop = this.$store.state.bird.top;
       if (Utils.intersects(
-        gBound.top, gBound.left, gBound.width, gBound.height,
-        bBound.top - birdTop, bBound.left, bBound.width, bBound.height,
+        gBound.left, gBound.top, gBound.width, gBound.height,
+        bBound.left, bBound.top - birdTop, bBound.width, bBound.height, false
       )) {
-        this.dead();
+        return this.dead(true);
+      }
+      
+      const upElem = document.getElementById('pipe-up');
+      const downElem = document.getElementById('pipe-down');
+      const lineElem = document.getElementById('pipe-line');
+      const uBound = upElem.getBoundingClientRect();
+      const dBound = downElem.getBoundingClientRect();
+      const lBound = lineElem.getBoundingClientRect();
+
+      const { pipeUpBound } = this.$store.state.pipe;
+      if (pipeUpBound && Utils.intersects(
+        uBound.left, uBound.top, uBound.width, uBound.height,
+        bBound.left, bBound.top - birdTop, bBound.width, bBound.height
+      )) {
+        return this.dead();
+      }
+
+      if (Utils.intersects(
+        dBound.left, dBound.top, dBound.width, dBound.height,
+        bBound.left, bBound.top - birdTop, bBound.width, bBound.height
+      )) {
+        return this.dead();
+      }
+      
+      if (Utils.intersects(
+        lBound.left, lBound.top, lBound.width, lBound.height,
+        bBound.left, bBound.top - birdTop, bBound.width, bBound.height
+      )) {
+        this.gainPoint();
       }
 
       // this.pipeStep2++;
@@ -94,15 +125,24 @@ export default {
       // }
     },
 
-    dead() {
-      this.hitAudio && this.hitAudio.play();
+    dead(force) {
+      if (this.isPlaying) {
+        this.hitAudio && this.hitAudio.play();
+      }
+
+      if (force) {
+        clearInterval(this.intervalId)
+      }
+
       this.$store.commit('dead');
-      clearInterval(this.intervalId)
     },
 
     gainPoint() {
-      this.$store.commit('gainPoint');
-      this.pointAudio && this.pointAudio.play();
+      if (!this.$store.state.pipe.lineDisable) {
+        this.$store.commit('gainPoint');
+        this.$store.commit('pipe/toggleLine', true);
+        this.pointAudio && this.pointAudio.play();
+      }
     }
 
   },
@@ -126,5 +166,15 @@ export default {
     height: 100%;
     overflow: hidden;
     position: relative;
+  }
+
+  #dummy {
+    top:0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    position: fixed;
+    z-index: 10;
+    border-color: green;
   }
 </style>

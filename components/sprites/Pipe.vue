@@ -1,8 +1,8 @@
 <template>
   <div class="pipe-container">
-      <div class="sprite pipe down" :style="[downStyle]"></div>
-      <div class="sprite pipe up" :style="[upStyle]"></div>
-      <div class="sprite line" :style="[lineStyle]"></div>
+      <div id="pipe-down" class="sprite pipe down" :style="[downStyle]"></div>
+      <div id="pipe-up" class="sprite pipe up" :style="[upStyle]"></div>
+      <div id="pipe-line" class="sprite line" :style="[lineStyle]"></div>
   </div>
 </template>
 
@@ -38,7 +38,17 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('bird/size', { width: 17, height: 12 });
+    const upElem = document.getElementById('pipe-up');
+    const downElem = document.getElementById('pipe-down');
+    const lineElem = document.getElementById('pipe-line');
+
+    setTimeout(() => {
+      const uBound = upElem.getBoundingClientRect();
+      const dBound = downElem.getBoundingClientRect();
+      const lBound = lineElem.getBoundingClientRect();
+
+      this.$store.commit('pipe/setBound', { uBound, dBound, lBound });
+    }, 100)
   },
 }
 </script>
@@ -57,10 +67,12 @@ export default {
 
     &.up {
       top: calc(50% + $pipe_distance);
+      right: $game_width;
     }
 
     &.down {
       transform: rotate(180deg);
+      right: $game_width;
       bottom: calc(50% + $pipe_distance);
     }
   }

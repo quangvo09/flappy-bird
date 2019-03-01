@@ -3,7 +3,7 @@ module.exports = {
     return Math.floor(Math.random() * (max - min + 1) + min);
   },
 
-  intersects: (x1, y1, w1, h1, x2, y2, w2, h2) => {
+  intersects: (x1, y1, w1, h1, x2, y2, w2, h2, debug = true) => {
     if (w2 !== Infinity && w1 !== Infinity) {
       w2 += x2;
       w1 += x1;
