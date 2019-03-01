@@ -138,7 +138,7 @@ export default {
     },
 
     gainPoint() {
-      if (!this.$store.state.pipe.lineDisable) {
+      if (!this.$store.state.pipe.lineDisable && this.isPlaying) {
         this.$store.commit('gainPoint');
         this.$store.commit('pipe/toggleLine', true);
         this.pointAudio && this.pointAudio.play();
