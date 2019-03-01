@@ -1,7 +1,8 @@
 <template>
   <div class="pipe-container">
-      <div class="pipe down" v-bind:style="[downStyle]"></div>
-      <div class="pipe up" v-bind:style="[upStyle]"></div>
+      <div class="sprite pipe down" :style="[downStyle]"></div>
+      <div class="sprite pipe up" :style="[upStyle]"></div>
+      <div class="sprite line" :style="[lineStyle]"></div>
   </div>
 </template>
 
@@ -29,6 +30,12 @@ export default {
         right: `${this.$props.step-this.width}px`
       }
     },
+    lineStyle () {
+      return {
+        top: `calc(50% - 30px - ${this.$props.top}px)`,
+        right: `${this.$props.step-this.width/2}px`
+      }
+    },
   },
   mounted() {
     this.$store.commit('bird/size', { width: 17, height: 12 });
@@ -47,7 +54,6 @@ export default {
     background: url('~assets/images/sprites.png') no-repeat -84px -323px;
     width: 26px;
 	  height: 160px;
-    border: 1px solid red;
 
     &.up {
       top: calc(50% + $pipe_distance);
@@ -57,6 +63,12 @@ export default {
       transform: rotate(180deg);
       bottom: calc(50% + $pipe_distance);
     }
+  }
+
+  .line {
+    position: absolute;
+    height: 2 * $pipe_distance;
+    width: 1px;
   }
 
 

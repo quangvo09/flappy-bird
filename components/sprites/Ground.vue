@@ -1,10 +1,18 @@
 <template>
-  <div class="ground"></div>
+  <div id="ground" class="sprite ground" :class="{ 'running': isRunning }"></div>
 </template>
 
 <script>
 export default {
-   
+  props: [
+    'isRunning'
+  ],
+  mounted() {
+  const groundElem = document.getElementById('ground');
+  const bound = groundElem.getBoundingClientRect();
+
+  this.$store.commit('ground/setBound', bound);
+  },
 }
 </script>
 
@@ -16,7 +24,10 @@ export default {
     backround-repeat: repeat-x;
     width: 168px;
     height: 56px;
-    animation: ground-play 1s linear infinite;
+
+    &.running {
+      animation: ground-play 1s linear infinite;
+    }
   }
 
   @keyframes ground-play {

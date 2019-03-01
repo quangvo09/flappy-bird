@@ -11,5 +11,9 @@ export const state = () => ({
 export const mutations = {
   play(state) {
     state.gameState = GAME_STATES.PLAYING
+  },
+
+  dead(state) {
+    state.gameState = GAME_STATES.DEAD
   }
 }

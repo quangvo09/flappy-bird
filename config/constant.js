@@ -9,6 +9,6 @@ export const GameSettings = {
   BIRD_DROP_DELTA3: 0.0001,
 
   PIPE_DISTANCE: 100,
-  PIPE_SPEED: 1,
+  PIPE_SPEED: 1.2,
   PIPE_SPEED_DELTA: 0.0001,
 }

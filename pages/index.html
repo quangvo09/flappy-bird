@@ -2,13 +2,13 @@
   <div class="background dark"></div>
   <div class="game-container">
 
-    <div v-if="gameState == 0">
+    <div class="intro-container" v-if="gameState == 0">
       <intro />
-      <ground />
-      <bird />
+      <ground :isRunning="true" />
+      <bird :isPlaying="true" />
     </div>
     
-    <playing v-if="gameState == 1" />
-    <dead v-if="gameState == 2" />
+    <playing v-if="gameState == 1 || gameState == 2" />
+    <dead v-if="gameState == 2 || gameState == 2" />
   </div>
 </div>

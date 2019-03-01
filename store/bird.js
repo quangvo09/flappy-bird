@@ -6,6 +6,7 @@ export const state = () => ({
   height: 0,
   top: 0,
   left: 0,
+  bound: null,
   flyDelta: GameSettings.BIRD_FlY_DELTA,
   flyDelta2: GameSettings.BIRD_FlY_DELTA2,
   dropDelta: GameSettings.BIRD_DROP_DELTA,
@@ -37,5 +38,9 @@ export const mutations = {
     state.dropDelta2 -= GameSettings.BIRD_DROP_DELTA3;
     state.flyDelta = GameSettings.BIRD_FlY_DELTA;
     state.flyDelta2 = GameSettings.BIRD_FlY_DELTA2;
+  },
+
+  setBound(state, bound) {
+    state.bound = bound;
   }
 }
