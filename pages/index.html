@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="background dark"></div>
+  <div class="game-container">
+
+    <div v-if="gameState == 0">
+      <intro />
+      <ground />
+      <bird />
+    </div>
+    
+    <playing v-if="gameState == 1" />
+    <dead v-if="gameState == 2" />
+  </div>
+</div>
