@@ -1,5 +1,6 @@
 <template>
   <div class="scene-playing" v-on:click="tap">
+    <score />
     <ground :isRunning="isPlaying" />
     <bird :isPlaying="isPlaying" />
     <pipe :top="pipeTop" :step="pipeStep" />
@@ -18,6 +19,7 @@ import Utils from '../utils/utils.js';
 import Bird from './sprites/Bird'
 import Ground from './sprites/Ground'
 import Pipe from './sprites/Pipe'
+import Score from './sprites/Score'
 
 export default {
   data : function(){  
@@ -40,6 +42,7 @@ export default {
     'bird': Bird,
     'ground': Ground,
     'pipe': Pipe,
+    'score': Score
   },
   methods: {
     tap: function() {
@@ -95,6 +98,11 @@ export default {
       this.hitAudio && this.hitAudio.play();
       this.$store.commit('dead');
       clearInterval(this.intervalId)
+    },
+
+    gainPoint() {
+      this.$store.commit('gainPoint');
+      this.pointAudio && this.pointAudio.play();
     }
 
   },
@@ -104,6 +112,7 @@ export default {
     this.deadAudio = document.getElementById('deadAudio');
     this.hitAudio = document.getElementById('hitAudio');
     this.wingAudio = document.getElementById('wingAudio');
+    this.pointAudio = document.getElementById('pointAudio');
   },
   beforeDestroy () {
     clearInterval(this.intervalId)
