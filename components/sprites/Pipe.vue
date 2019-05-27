@@ -61,6 +61,7 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../assets/scss/main.scss';
+  $pipe_distance: '30px';
 
   .pipe-container {
   }
@@ -72,20 +73,20 @@ export default {
 	  height: 160px;
 
     &.up {
-      top: calc(50% + $pipe_distance);
+      top: calc(50% + 30px);
       right: $game_width;
     }
 
     &.down {
       transform: rotate(180deg);
       right: $game_width;
-      bottom: calc(50% + $pipe_distance);
+      bottom: calc(50% + 30px);
     }
   }
 
   .line {
     position: absolute;
-    height: 2 * $pipe_distance;
+    height: 60px;
     width: 1px;
   }
 
