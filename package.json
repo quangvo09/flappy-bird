@@ -12,12 +12,12 @@
   },
   "dependencies": {
     "cross-env": "^5.2.0",
-    "nuxt": "^2.4.0"
+    "nuxt": "^3.0.0"
   },
   "devDependencies": {
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
-    "sass-loader": "^7.1.0",
-    "url-loader": "^1.1.2"
+    "sass-loader": "^13.2.0",
+    "url-loader": "^4.1.1"
   }
 }
